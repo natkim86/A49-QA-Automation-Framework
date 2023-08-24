@@ -15,6 +15,7 @@ public class Homework18 extends BaseTest{
     providePassword("AxKrdBnS");
     clickSubmit();
     clickPlay();
+    validateSong();
     }
 
    private void clickPlay() {
@@ -26,9 +27,9 @@ public class Homework18 extends BaseTest{
 
     }
 
-    public boolean validateSong() {
-        WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid=sound-bar-play']"));
-        return soundBar.isDisplayed();
+    public void validateSong() {
+        WebElement soundBar = driver.findElement(By.cssSelector("[data-testid='sound-bar-play']"));
+        Assert.assertTrue(soundBar.isDisplayed());
     }
 
 }
