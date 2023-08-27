@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,20 +23,19 @@ public class Homework19 extends BaseTest {
     }
 
     private void clickPlaylist() {
-        WebElement playList = driver.findElement(By.cssSelector(".playlist:nth-child(4)"));
+        WebElement playList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
         playList.click();
 
     }
 
-    private void clickDeletePlayList() throws InterruptedException {
-        WebElement deleteList = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+    private void clickDeletePlayList()  {
+        WebElement deleteList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
         deleteList.click();
-        Thread.sleep(2000);
 
     }
 
     private String deletePlayListMessage() {
-        WebElement deleteMsg = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement deleteMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return deleteMsg.getText();
 
     }
