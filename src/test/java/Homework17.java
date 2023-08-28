@@ -10,7 +10,7 @@ public class Homework17 extends BaseTest {
 
 
     @Test
-    public void addSongToPlaylist() throws InterruptedException {
+    public void addSongToPlaylist()  {
 
         String newSongNotification = "Added 1 song into";
 
@@ -46,7 +46,7 @@ public class Homework17 extends BaseTest {
     }
 
 
-    public void clickAddTo() throws InterruptedException {
+    public void clickAddTo()  {
         WebElement addTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']//button[@data-test='add-to-btn']")));
         addTo.click();
     }
