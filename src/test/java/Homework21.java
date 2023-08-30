@@ -7,33 +7,36 @@ import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest {
 
-    String playListName;
+    String playListName = "Homework21";
 
     @Test
     public void renamePlayList() {
-        String updateMessage = "Updated playlist \"homework19.\"";
-        playListName = "homework19";
+
+        String updatePLMsg = "Updated playlist \"Homework21.\"";
 
         navigateToPage();
         provideEmail("natalia.kim01@testpro.io");
         providePassword("AxKrdBnS");
         clickSubmit();
         doubleClickPlaylist();
-        playListName ="Updated"+playListName;
-       enterNewPlayListName(playListName);
-      Assert.assertEquals(playListMessage(), updateMessage);
+        enterNewPlayListName(playListName);
+        Assert.assertEquals(playListMessage(), updatePLMsg);
     }
+
     public void doubleClickPlaylist() {
-        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'" + playListName + "')]")));
+        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
         actions.doubleClick(playlistElement).perform();
     }
-   public void enterNewPlayListName(String newPlayListName) {WebElement playListInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
-        playListInputField.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
-       playListInputField.sendKeys(newPlayListName);
-       playListInputField.sendKeys(Keys.ENTER);
-   }
+
+    public void enterNewPlayListName(String newPlayListName) {
+        WebElement playListInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        playListInputField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+        playListInputField.sendKeys(playListName);
+        playListInputField.sendKeys(Keys.ENTER);
+    }
+
     public String playListMessage() {
-      WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-      return notification.getText();
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notification.getText();
     }
 }
