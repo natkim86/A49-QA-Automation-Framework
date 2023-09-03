@@ -16,9 +16,9 @@ public class HomePage extends BasePage{
     }
 
 
-    By choosePlayListName =  By.cssSelector(".playlist:nth-child(4)");
-    By playListInputField = By.cssSelector("[name='name']");
-    By notification = By.cssSelector("div.success.show");
+    private By choosePlayListName =  By.cssSelector(".playlist:nth-child(4)");
+    private By playListInputField = By.cssSelector("[name='name']");
+    private By notification = By.cssSelector("div.success.show");
 
 
 
