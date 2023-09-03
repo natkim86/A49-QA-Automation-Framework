@@ -11,6 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
+import pages.BasePage;
 
 import java.time.Duration;
 
@@ -19,9 +20,8 @@ public class BaseTest {
     public WebDriver driver = null;
     public static Actions actions = null;
     public String url = "https://qa.koel.app/";
-
-
     WebDriverWait wait;
+    BasePage basePage;
 
     @BeforeSuite
     static void setupClass() {
@@ -35,37 +35,13 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
-       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url = BaseURL;
         wait = new WebDriverWait(driver,Duration.ofSeconds(30));
         actions = new Actions(driver);
-        navigateToPage();
+        basePage = new BasePage(driver, wait, actions);
+        basePage.navigateToPage(url);
     }
 
-
-    protected void clickSubmit() {
-        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
-        submit.click();
-    }
-
-    protected void providePassword(String password) {
-        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-        passwordField.clear();
-        passwordField.sendKeys("AxKrdBnS");
-    }
-
-    protected void provideEmail(String email) {
-
-        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-        emailField.clear();
-        emailField.sendKeys(email);
-    }
-
-    protected void navigateToPage() {
-        driver.get(url);
-    }
-    //@AfterMethod
-    // public void closeBrowser(){
-    //driver.quit();
 }
