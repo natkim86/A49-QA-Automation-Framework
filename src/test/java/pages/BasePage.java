@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-   protected WebDriver driver;
-   protected WebDriverWait wait;
-  protected Actions actions;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
 
     public BasePage(WebDriver driver, WebDriverWait wait, Actions actions) {
         this.driver = driver;
@@ -26,7 +26,7 @@ public class BasePage {
         driver.get(url);
     }
 
-    public void doubleClick (By locator){
+    public void doubleClick(By locator) {
         actions.doubleClick(findElement(locator)).perform();
     }
 
