@@ -40,7 +40,7 @@ public class BaseTest {
         url = BaseURL;
         wait = new WebDriverWait(driver,Duration.ofSeconds(30));
         actions = new Actions(driver);
-        basePage = new BasePage(driver, wait, actions);
+        basePage = new BasePage(driver);
         basePage.navigateToPage(url);
     }
 

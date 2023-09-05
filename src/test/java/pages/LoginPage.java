@@ -1,38 +1,41 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
-    public LoginPage(WebDriver driver, WebDriverWait wait, Actions actions) {
-        super(driver, wait, actions);
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
+    @FindBy(css = "[type='email']")
+    private WebElement emailField;
+    @FindBy(css = "[type='password']")
+     private WebElement passwordField;
+    @FindBy (css = "[type='submit']")
+    private WebElement submit;
 
-    private By emailField = By.cssSelector("input[type='email']");
-    private By passwordField = By.cssSelector("input[type='password']");
-    private By submit = By.cssSelector("button[type='submit']");
-
-
-    public void provideEmail(String email) {
-        findElement(emailField).sendKeys(email);
+   // private By emailField = By.cssSelector("input[type='email']");
+   // private By passwordField = By.cssSelector("input[type='password']");
+   // private By submit = By.cssSelector("button[type='submit']");
+    public LoginPage provideEmail(String email) {
+        emailField.sendKeys(email);
+        return this;
     }
-
-    public void providePassword(String password) {
-        findElement(passwordField).sendKeys(password);
+    public LoginPage providePassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
     }
-
-    public void clickSubmit() {
-        findElement(submit).click();
+    public LoginPage clickSubmit() {
+        submit.click();
+        return this;
     }
+   public LoginPage loginCorrectCred() {
 
-    public void loginCorrectCred() {
-
-        provideEmail("natalia.kim01@testpro.io");
-        providePassword("AxKrdBnS");
-        clickSubmit();
-    }
+      provideEmail("natalia.kim01@testpro.io");
+      providePassword("AxKrdBnS");
+      clickSubmit();
+       return this;
+   }
 }
