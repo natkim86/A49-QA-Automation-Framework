@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -29,15 +30,15 @@ public class BaseTest {
     WebDriverWait wait;
     // BasePage basePage;
 
-    @BeforeSuite
-    public void setupSuite() throws MalformedURLException {
-        String browser = System.getProperty("browser");
+   // @BeforeSuite
+   // public void setupSuite() throws MalformedURLException {
+       // String browser = System.getProperty("browser");
         // String browser = "grid_chrome";
-        driver = setupBrowser(browser);
+       // driver = setupBrowser(browser);
         // setupChrome();
         //setupFirefox();
         // setupEdge();
-    }
+   // }
 
     public WebDriver setupBrowser(String browser) throws MalformedURLException {
         // java -jar selenium-server-4.12.1.jar standalone --selenium-manager true
@@ -45,15 +46,11 @@ public class BaseTest {
         String gridURL = "http://10.0.0.126:4444";
         switch (browser) {
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "geckodriver");
-                return driver = new FirefoxDriver();
-            //return setupFirefox();
+                return setupFirefox();
             case "chrome":
-                return driver = new ChromeDriver();
-            // return setupChrome();
+                return setupChrome();
             case "edge":
-                return driver = new EdgeDriver();
-            // return setupEdge();
+                return setupEdge();
             case "grid-chrome":
                 capabilities.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
@@ -64,20 +61,29 @@ public class BaseTest {
                 capabilities.setCapability("browserName", "edge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             default:
-                return driver = new ChromeDriver();
+               // return setupChrome();
+                //return setupEdge();
+                return setupFirefox();
         }
     }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) {
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
+        String browser = System.getProperty("browser");
+        driver = setupBrowser("browser");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url = BaseURL;
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         actions = new Actions(driver);
+        driver.get(url);
         //  basePage = new BasePage(driver);
         //basePage.navigateToPage(url);
+    }
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
     }
 
     public WebDriver setupFirefox() {
@@ -88,8 +94,10 @@ public class BaseTest {
 
     public WebDriver setupEdge() {
         WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
-        return driver;
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("--remote-allow-origins=*");
+        return driver = new EdgeDriver(edgeOptions);
+
     }
 
     public WebDriver setupChrome() {
@@ -97,7 +105,6 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        driver = new ChromeDriver(options);
-        return driver;
+        return driver = new ChromeDriver(options);
     }
 }

@@ -3,29 +3,31 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
-public class LoginTest24 extends BaseTest{
-LoginPage loginPage;
+public class LoginTest24 extends BaseTest {
+    LoginPage loginPage;
 
-@BeforeMethod
-void setup(){
-    loginPage = new LoginPage(driver);
-    driver.get(url);
-}
+    //@BeforeMethod
+//void setup(){
+    //loginPage = new LoginPage(driver);
+    //driver.get(url);
+//}
     @Test
-    public void invalidEmailPassword(){
-        LoginPage loginPage = new LoginPage(driver);
+    public void invalidEmailPassword() {
+        loginPage = new LoginPage(driver);
         loginPage.provideEmail("incorrectEmail").providePassword("incorrectPwd").clickSubmit();
     }
-@Test
+    @Test
     public void emptyEmail() {
-    loginPage.provideEmail("").providePassword("incorrectPwd").clickSubmit();
-}
-  @Test
-  public void emptyEmailPassword() {
-    loginPage.provideEmail("").providePassword("").clickSubmit();
-  }
+        loginPage = new LoginPage(driver);
+        loginPage.provideEmail("").providePassword("incorrectPwd").clickSubmit();
+    }
+    @Test
+    public void emptyEmailPassword() {
+        loginPage = new LoginPage(driver);
+        loginPage.provideEmail("").providePassword("").clickSubmit();
+    }
 //@AfterClass
-   // public void closeBrowser(){
-   // driver.quit();
+    // public void closeBrowser(){
+    // driver.quit();
 }
 //}
