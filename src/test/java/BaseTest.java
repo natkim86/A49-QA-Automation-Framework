@@ -27,17 +27,18 @@ public class BaseTest {
     public static Actions actions = null;
     public String url = "https://qa.koel.app/";
     WebDriverWait wait;
-   // BasePage basePage;
+    // BasePage basePage;
 
     @BeforeSuite
     public void setupSuite() throws MalformedURLException {
         String browser = System.getProperty("browser");
-       // String browser = "grid_chrome";
-        driver= setupBrowser(browser);
-       // setupChrome();
+        // String browser = "grid_chrome";
+        driver = setupBrowser(browser);
+        // setupChrome();
         //setupFirefox();
-       // setupEdge();
+        // setupEdge();
     }
+
     public WebDriver setupBrowser(String browser) throws MalformedURLException {
         // java -jar selenium-server-4.12.1.jar standalone --selenium-manager true
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -46,18 +47,22 @@ public class BaseTest {
             case "firefox":
                 System.setProperty("webdriver.gecko.driver", "geckodriver");
                 return driver = new FirefoxDriver();
-               // return setupFirefox();
+            //return setupFirefox();
             case "chrome":
-                return setupChrome();
+                return driver = new ChromeDriver();
+            // return setupChrome();
             case "edge":
-                return setupEdge();
-            case "grid_chrome":
+                return driver = new EdgeDriver();
+            // return setupEdge();
+            case "grid-chrome":
                 capabilities.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),capabilities);
-            case "grid_firefox":
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-firefox":
                 capabilities.setCapability("browserName", "firefox");
-                //caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),capabilities);
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-edge":
+                capabilities.setCapability("browserName", "edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             default:
                 return driver = new ChromeDriver();
         }
@@ -71,7 +76,7 @@ public class BaseTest {
         url = BaseURL;
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         actions = new Actions(driver);
-      //  basePage = new BasePage(driver);
+        //  basePage = new BasePage(driver);
         //basePage.navigateToPage(url);
     }
 
@@ -80,11 +85,13 @@ public class BaseTest {
         driver = new FirefoxDriver();
         return driver;
     }
+
     public WebDriver setupEdge() {
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         return driver;
     }
+
     public WebDriver setupChrome() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
