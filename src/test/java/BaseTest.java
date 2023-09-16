@@ -16,7 +16,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
-/// import pages.BasePage;
+import pages.BasePage;
+import pages.BasePage;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -28,7 +29,8 @@ public class BaseTest {
     public static Actions actions = null;
     public String url = "https://qa.koel.app/";
     WebDriverWait wait;
-    // BasePage basePage;
+   // private static final ThreadLocal<WebDriver> treadDriver = new ThreadLocal<>();
+    BasePage basePage;
 
     // @BeforeSuite
     // public void setupSuite() throws MalformedURLException {
@@ -69,17 +71,17 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) throws MalformedURLException {
+public void launchBrowser (String BaseURL) throws MalformedURLException {
         String browser = System.getProperty("browser");
-        driver = setupBrowser(browser);dd
+        driver = setupBrowser(browser);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url = BaseURL;
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         actions = new Actions(driver);
         driver.get(url);
-        //  basePage = new BasePage(driver);
-        //basePage.navigateToPage(url);
+        basePage = new BasePage(driver);
+        basePage.navigateToPage(url);
     }
 
     @AfterMethod
