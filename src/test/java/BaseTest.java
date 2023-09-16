@@ -16,7 +16,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
-import pages.BasePage;
+/// import pages.BasePage;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -30,15 +30,15 @@ public class BaseTest {
     WebDriverWait wait;
     // BasePage basePage;
 
-   // @BeforeSuite
-   // public void setupSuite() throws MalformedURLException {
-       // String browser = System.getProperty("browser");
-        // String browser = "grid_chrome";
-       // driver = setupBrowser(browser);
-        // setupChrome();
-        //setupFirefox();
-        // setupEdge();
-   // }
+    // @BeforeSuite
+    // public void setupSuite() throws MalformedURLException {
+    // String browser = System.getProperty("browser");
+    // String browser = "grid_chrome";
+    // driver = setupBrowser(browser);
+    // setupChrome();
+    //setupFirefox();
+    // setupEdge();
+    // }
 
     public WebDriver setupBrowser(String browser) throws MalformedURLException {
         // java -jar selenium-server-4.12.1.jar standalone --selenium-manager true
@@ -61,7 +61,7 @@ public class BaseTest {
                 capabilities.setCapability("browserName", "edge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             default:
-               // return setupChrome();
+                // return setupChrome();
                 //return setupEdge();
                 return setupFirefox();
         }
@@ -71,7 +71,7 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         String browser = System.getProperty("browser");
-        driver = setupBrowser("browser");
+        driver = setupBrowser(browser);dd
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url = BaseURL;
@@ -81,8 +81,9 @@ public class BaseTest {
         //  basePage = new BasePage(driver);
         //basePage.navigateToPage(url);
     }
+
     @AfterMethod
-    public void closeBrowser(){
+    public void closeBrowser() {
         driver.quit();
     }
 
@@ -108,3 +109,5 @@ public class BaseTest {
         return driver = new ChromeDriver(options);
     }
 }
+
+
