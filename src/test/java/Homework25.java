@@ -1,24 +1,21 @@
 import org.testng.annotations.Test;
-import pages.HomePage;
 import pages.LoginPage;
 
- public class Homework25 extends BaseTest {
+public class Homework25 extends BaseTest {
+    @Test
+            public void loginValid(){
+    LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("natalia.kim01@testpro.io");
+        loginPage.providePassword("WyYVUKJl2j5v");
+        loginPage.clickSubmit();
+    }
 
+    @Test
+    public void loginInvalidEmail(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("invalid@mail.io");
+        loginPage.providePassword("WyYVUKJl2j5v");
+        loginPage.clickSubmit();
+    }
 
- @Test
- public void renamePlayList() {
-     String newPlayList = "Homework22";
-
-    String updatePLMsg = "Updated playlist";
-
-   LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
-
-  // loginPage.loginCorrectCred();
-    homePage.doubleClickPlaylist();
-    homePage.enterNewPlayListName(newPlayList);
-       // Assert.assertEquals(homePage.playListMessage(), updatePLMsg);
-
-  }
-
- }
+}

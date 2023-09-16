@@ -10,31 +10,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
- public class BasePage {
- protected WebDriver driver;
-  protected WebDriverWait wait;
- protected Actions actions;
+public class BasePage {
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
 
- public BasePage(WebDriver givenDriver) {
-          driver = givenDriver;
-          wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-          actions = new Actions(driver);
-          PageFactory.initElements(driver, this);
-         }
-
-   public WebElement findElement(By locator) {
-           return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-         }
-
-   public void navigateToPage(String url) {
-      driver.get(url);
-   }
-
-
+    public BasePage(WebDriver givenDriver) {
+        this.driver = givenDriver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        PageFactory.initElements(driver, this);
+    }
+    public void navigateToPage(String url) {
+        driver.get(url);
     }
 
-
-    //@AfterMethod
-    // public void closeBrowser(){
-    //driver.quit();
+}
 

@@ -15,13 +15,6 @@ public class HomePage extends BasePage {
     @FindBy(css = "[name='name']")
     private WebElement playListInputField;
 
-    // @FindBy(css = "div.success.show")
-   // private WebElement notification;
-
-    //  private By choosePlayListName =  By.cssSelector(".playlist:nth-child(4)");
-    //  private By playListInputField = By.cssSelector("[name='name']");
-    //  private By notification = By.cssSelector("div.success.show");
-
     public HomePage doubleClickPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(doubleClick));
         actions.doubleClick(doubleClick).perform();
@@ -34,8 +27,5 @@ public class HomePage extends BasePage {
         playListInputField.sendKeys(Keys.ENTER);
         return this;
     }
-   // public HomePage playListMessage() {
-      //  notification.getText();
-     //   return this;
     }
-//}
+
