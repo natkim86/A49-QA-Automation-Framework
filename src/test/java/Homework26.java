@@ -1,7 +1,7 @@
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
-public class Homework25 extends BaseTest {
+public class Homework26 extends BaseTest {
     @Test
             public void loginValid(){
     LoginPage loginPage = new LoginPage(getDriver());
